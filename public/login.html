@@ -1,0 +1,54 @@
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome — Voice AI Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+
+<div class="login-scene">
+  <div class="login-noise" aria-hidden="true"></div>
+
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="brand-mark">◉</span>
+      <div>
+        <h1>Console</h1>
+        <p class="brand-sub">Voice AI Studio</p>
+      </div>
+    </div>
+
+    <h2 class="login-heading">Step into the studio</h2>
+    <p class="login-sub">Tell us your name so we can set up your console. We don't store anything else — no email, no password, nothing tracked.</p>
+
+    <form id="loginForm" class="login-form">
+      <label class="field">
+        <span>Your name</span>
+        <input type="text" id="nameInput" placeholder="e.g. Ahmed" required maxlength="40" autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>Country <span class="field-optional">(helps us suggest suitable voices)</span></span>
+        <select id="countryInput">
+          <option value="">Prefer not to say</option>
+        </select>
+      </label>
+
+      <button type="submit" class="btn-generate full-width">Enter Console</button>
+    </form>
+
+    <p class="login-footnote">By continuing you agree this is a local demo — your name stays in this browser only.</p>
+  </div>
+</div>
+
+<script src="countries.js"></script>
+<script src="login.js"></script>
+</body>
+</html>
+```

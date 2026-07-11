@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Console — Voice AI Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="console">
+
+  <!-- ============ SIDEBAR: Cast ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">◉</span>
+      <div>
+        <h1>Console</h1>
+        <p class="brand-sub">Voice AI Studio</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">
+        <span>Cast</span>
+        <span id="voiceCount" class="mono-meta">—</span>
+      </div>
+
+      <div class="voice-filters">
+        <input type="text" id="voiceSearch" class="voice-search" placeholder="Search voices…" autocomplete="off" />
+      </div>
+      <div class="voice-filters">
+        <select id="languageFilter" class="voice-lang-filter">
+          <option value="">All languages</option>
+        </select>
+        <select id="countryFilter" class="voice-lang-filter">
+          <option value="">All countries</option>
+        </select>
+      </div>
+
+      <div id="voiceGrid" class="voice-grid">
+        <div class="voice-card skeleton"></div>
+        <div class="voice-card skeleton"></div>
+        <div class="voice-card skeleton"></div>
+        <div class="voice-card skeleton"></div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <span id="apiStatusDot" class="status-dot"></span>
+      <span id="apiStatusText">Connecting…</span>
+      <span class="sidebar-user" id="sidebarUser"></span>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN: Console ============ -->
+  <main class="main">
+
+    <header class="topbar">
+      <div class="topbar-voice" id="selectedVoiceBadge">
+        <span class="topbar-voice-avatar" id="selectedVoiceAvatar">?</span>
+        <div>
+          <p class="topbar-voice-name" id="selectedVoiceName">Select a voice</p>
+          <p class="topbar-voice-lang" id="selectedVoiceLang">—</p>
+        </div>
+      </div>
+      <div class="on-air" id="onAirLamp">
+        <span class="on-air-dot"></span>
+        <span class="on-air-label">ON AIR</span>
+        <span class="on-air-time" id="onAirTime">00:00</span>
+      </div>
+    </header>
+
+    <!-- Signature element: signal bay / oscilloscope -->
+    <section class="scope-panel">
+      <div class="scope-bezel-label">
+        <span>SIGNAL</span>
+        <span id="scopeStatus">IDLE</span>
+      </div>
+      <canvas id="scope" class="scope-canvas"></canvas>
+      <div class="scope-ruler" aria-hidden="true">
+        <span>−1</span><span>0</span><span>+1</span>
+      </div>
+      <div class="scope-overlay" id="scopeIdle">Sound comes alive here — generate a line to see it</div>
+    </section>
+
+    <!-- Emotion / speed controls -->
+    <section class="reaction-rail">
+      <div class="rail-group">
+        <p class="rail-label">Emotion</p>
+        <!-- NOTE: only emotions Cartesia's API actually accepts are listed here
+             ("scared" was removed — Cartesia rejects it with a 400 "invalid
+             emotion" error, which is what was blocking every generation
+             that had it selected). Keep this list in sync with
+             SUPPORTED_EMOTIONS in server.js. -->
+        <div class="reaction-chips" id="emotionChips">
+          <button class="chip active" data-emotion="">Neutral</button>
+          <button class="chip" data-emotion="excited">Excited</button>
+          <button class="chip" data-emotion="content">Content</button>
+          <button class="chip" data-emotion="sad">Sad</button>
+          <button class="chip" data-emotion="angry">Angry</button>
+        </div>
+      </div>
+      <div class="rail-group">
+        <p class="rail-label">Speed</p>
+        <div class="reaction-chips" id="speedChips">
+          <button class="chip" data-speed="slow">Slow</button>
+          <button class="chip active" data-speed="normal">Normal</button>
+          <button class="chip" data-speed="fast">Fast</button>
+        </div>
+      </div>
+      <div class="rail-group">
+        <p class="rail-label">Extra</p>
+        <div class="reaction-chips">
+          <button class="chip" id="laughterToggle" type="button">+ Laughter</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Script input -->
+    <section class="script-panel">
+      <label class="script-label" for="scriptInput">Script</label>
+      <textarea id="scriptInput" placeholder="Type your script here... it comes to life in the character's voice." maxlength="900"></textarea>
+      <div class="script-footer">
+        <span id="charCount" class="mono-meta">0 / 900</span>
+        <button id="generateBtn" class="btn-generate">
+          <span class="btn-generate-icon">▶</span> Generate Voice
+        </button>
+      </div>
+    </section>
+
+    <!-- Playback -->
+    <section class="playback-panel" id="playbackPanel" hidden>
+      <button id="playBtn" class="play-btn">▶</button>
+      <div class="playback-track">
+        <div class="playback-progress" id="playbackProgress"></div>
+      </div>
+      <span id="playbackTime" class="mono-meta">0:00</span>
+      <a id="downloadBtn" class="btn-mini" download="voice-line.wav">Download</a>
+    </section>
+
+    <!-- Takes: generation history, logged like a session tape -->
+    <section class="takes-panel">
+      <div class="sidebar-label">
+        <span>Take Log</span>
+        <button id="clearTakesBtn" class="btn-mini" title="Clear all takes">Clear</button>
+      </div>
+      <div id="takesList" class="takes-list">
+        <p class="takes-empty" id="takesEmpty">No takes yet — generate your first line and it'll be logged here.</p>
+      </div>
+    </section>
+
+    <audio id="audioPlayer" hidden></audio>
+    <audio id="takeAudioPlayer" hidden></audio>
+  </main>
+</div>
+
+<script src="countries.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

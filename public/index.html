@@ -1,164 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Console — Voice AI Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceForge AI — Premium Text-to-Speech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                        card: '#18181B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism Utility */
+        .glass-card {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-background text-white font-sans antialiased overflow-x-hidden">
 
-<div class="console">
+    <div class="blob bg-primary w-96 h-96 rounded-full top-0 left-[-10%]"></div>
+    <div class="blob bg-secondary w-96 h-96 rounded-full top-[20%] right-[-10%] animation-delay-2000"></div>
 
-  <!-- ============ SIDEBAR: Cast ============ -->
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-mark">◉</span>
-      <div>
-        <h1>Console</h1>
-        <p class="brand-sub">Voice AI Studio</p>
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">
-        <span>Cast</span>
-        <span id="voiceCount" class="mono-meta">—</span>
-      </div>
-
-      <div class="voice-filters">
-        <input type="text" id="voiceSearch" class="voice-search" placeholder="Search voices…" autocomplete="off" />
-      </div>
-      <div class="voice-filters">
-        <select id="languageFilter" class="voice-lang-filter">
-          <option value="">All languages</option>
-        </select>
-        <select id="countryFilter" class="voice-lang-filter">
-          <option value="">All countries</option>
-        </select>
-      </div>
-
-      <div id="voiceGrid" class="voice-grid">
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      <span id="apiStatusDot" class="status-dot"></span>
-      <span id="apiStatusText">Connecting…</span>
-      <span class="sidebar-user" id="sidebarUser"></span>
-    </div>
-  </aside>
-
-  <!-- ============ MAIN: Console ============ -->
-  <main class="main">
-
-    <header class="topbar">
-      <div class="topbar-voice" id="selectedVoiceBadge">
-        <span class="topbar-voice-avatar" id="selectedVoiceAvatar">?</span>
-        <div>
-          <p class="topbar-voice-name" id="selectedVoiceName">Select a voice</p>
-          <p class="topbar-voice-lang" id="selectedVoiceLang">—</p>
+    <nav class="fixed w-full z-50 glass-card !rounded-none !border-x-0 !border-t-0 border-b border-white/10 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 font-display text-xl font-bold tracking-tight">
+                <span class="text-primary">◉</span> VoiceForge <span class="text-secondary">AI</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm text-gray-400 font-medium">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#showcase" class="hover:text-white transition-colors">Voices</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+            </div>
+            <a href="login.html" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-[20px] text-sm font-medium transition-all backdrop-blur-md border border-white/10">
+                Sign In
+            </a>
         </div>
-      </div>
-      <div class="on-air" id="onAirLamp">
-        <span class="on-air-dot"></span>
-        <span class="on-air-label">ON AIR</span>
-        <span class="on-air-time" id="onAirTime">00:00</span>
-      </div>
-    </header>
+    </nav>
 
-    <!-- Signature element: signal bay / oscilloscope -->
-    <section class="scope-panel">
-      <div class="scope-bezel-label">
-        <span>SIGNAL</span>
-        <span id="scopeStatus">IDLE</span>
-      </div>
-      <canvas id="scope" class="scope-canvas"></canvas>
-      <div class="scope-ruler" aria-hidden="true">
-        <span>−1</span><span>0</span><span>+1</span>
-      </div>
-      <div class="scope-overlay" id="scopeIdle">Sound comes alive here — generate a line to see it</div>
-    </section>
-
-    <!-- Emotion / speed controls -->
-    <section class="reaction-rail">
-      <div class="rail-group">
-        <p class="rail-label">Emotion</p>
-        <!-- NOTE: only emotions Cartesia's API actually accepts are listed here
-             ("scared" was removed — Cartesia rejects it with a 400 "invalid
-             emotion" error, which is what was blocking every generation
-             that had it selected). Keep this list in sync with
-             SUPPORTED_EMOTIONS in server.js. -->
-        <div class="reaction-chips" id="emotionChips">
-          <button class="chip active" data-emotion="">Neutral</button>
-          <button class="chip" data-emotion="excited">Excited</button>
-          <button class="chip" data-emotion="content">Content</button>
-          <button class="chip" data-emotion="sad">Sad</button>
-          <button class="chip" data-emotion="angry">Angry</button>
+    <section class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 min-h-screen">
+        <div class="flex-1 text-center lg:text-left z-10">
+            <div class="inline-block glass-card px-4 py-1.5 mb-6 text-xs font-medium text-secondary border-secondary/30">
+                ✨ The Next Generation of Speech Synthesis
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
+                Breathe Life into <br> 
+                <span class="text-gradient">Every Word.</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Generate hyper-realistic, human-like voiceovers in milliseconds. Powered by advanced AI, designed for creators, developers, and global brands.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-medium px-8 py-4 rounded-[20px] hover:scale-105 transition-transform shadow-[0_0_30px_rgba(109,91,255,0.4)] flex items-center justify-center gap-2">
+                    Start Free Trial <span>→</span>
+                </a>
+                <a href="#demo" class="glass-card text-white font-medium px-8 py-4 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                    Watch Demo
+                </a>
+            </div>
         </div>
-      </div>
-      <div class="rail-group">
-        <p class="rail-label">Speed</p>
-        <div class="reaction-chips" id="speedChips">
-          <button class="chip" data-speed="slow">Slow</button>
-          <button class="chip active" data-speed="normal">Normal</button>
-          <button class="chip" data-speed="fast">Fast</button>
+
+        <div class="flex-1 relative w-full z-10 perspective-1000">
+            <div class="glass-card p-2 transform rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-all duration-700 shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" alt="Dashboard Preview" class="rounded-[16px] w-full h-auto opacity-80 mix-blend-screen" />
+                
+                <div class="absolute -left-6 top-1/4 glass-card p-4 flex items-center gap-3 animate-bounce shadow-xl">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">🎵</div>
+                    <div>
+                        <div class="text-xs text-gray-400">Generating...</div>
+                        <div class="text-sm font-medium">"Welcome to VoiceForge"</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="rail-group">
-        <p class="rail-label">Extra</p>
-        <div class="reaction-chips">
-          <button class="chip" id="laughterToggle" type="button">+ Laughter</button>
+    </section>
+
+    <section class="py-10 border-y border-white/5 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-6 font-medium">Trusted by innovative teams worldwide</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="font-display font-bold text-xl">Acme Corp</span>
+                <span class="font-display font-bold text-xl">GlobalMedia</span>
+                <span class="font-display font-bold text-xl">TechNova</span>
+                <span class="font-display font-bold text-xl">StudioX</span>
+                <span class="font-display font-bold text-xl">NextGen AI</span>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Script input -->
-    <section class="script-panel">
-      <label class="script-label" for="scriptInput">Script</label>
-      <textarea id="scriptInput" placeholder="Type your script here... it comes to life in the character's voice." maxlength="900"></textarea>
-      <div class="script-footer">
-        <span id="charCount" class="mono-meta">0 / 900</span>
-        <button id="generateBtn" class="btn-generate">
-          <span class="btn-generate-icon">▶</span> Generate Voice
-        </button>
-      </div>
+    <section id="features" class="py-24 px-6 max-w-7xl mx-auto relative">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Unmatched <span class="text-gradient">Capabilities</span></h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Everything you need to create studio-quality voiceovers, engineered into a single, lightning-fast platform.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-primary/20 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">⚡</div>
+                <h3 class="text-xl font-semibold mb-3">Ultra-Low Latency</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Generate up to 1 hour of audio in less than 3 seconds. Perfect for real-time applications.</p>
+            </div>
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-secondary/20 flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">🌍</div>
+                <h3 class="text-xl font-semibold mb-3">150+ Languages</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Reach a global audience with native-sounding accents across over 150 languages and dialects.</p>
+            </div>
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-purple-500/20 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">🎭</div>
+                <h3 class="text-xl font-semibold mb-3">Emotion Control</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Direct the performance. Switch seamlessly between sad, excited, angry, or whispering tones.</p>
+            </div>
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-pink-500/20 flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform">🎙️</div>
+                <h3 class="text-xl font-semibold mb-3">Voice Cloning</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Clone any voice with just 30 seconds of audio. Achieve 99% accuracy instantly.</p>
+            </div>
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-blue-500/20 flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">🎛️</div>
+                <h3 class="text-xl font-semibold mb-3">Advanced Mixer</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Tweak pacing, pronunciation, and pitch with our professional built-in studio console.</p>
+            </div>
+            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 rounded-[14px] bg-green-500/20 flex items-center justify-center mb-6 text-green-400 group-hover:scale-110 transition-transform">💻</div>
+                <h3 class="text-xl font-semibold mb-3">Developer API</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Integrate VoiceForge into your own apps with our robust, heavily documented REST API.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Playback -->
-    <section class="playback-panel" id="playbackPanel" hidden>
-      <button id="playBtn" class="play-btn">▶</button>
-      <div class="playback-track">
-        <div class="playback-progress" id="playbackProgress"></div>
-      </div>
-      <span id="playbackTime" class="mono-meta">0:00</span>
-      <a id="downloadBtn" class="btn-mini" download="voice-line.wav">Download</a>
+    <section class="py-24 relative overflow-hidden">
+        <div class="blob bg-secondary w-full h-64 rounded-full bottom-[-50%] opacity-20 blur-[100px]"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center z-10 relative">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Ready to create magic?</h2>
+            <p class="text-gray-400 mb-10 text-lg">Join 100,000+ creators building the future of audio today. No credit card required.</p>
+            <a href="login.html" class="inline-flex bg-white text-black font-semibold px-10 py-4 rounded-[20px] hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                Enter The Studio
+            </a>
+        </div>
     </section>
 
-    <!-- Takes: generation history, logged like a session tape -->
-    <section class="takes-panel">
-      <div class="sidebar-label">
-        <span>Take Log</span>
-        <button id="clearTakesBtn" class="btn-mini" title="Clear all takes">Clear</button>
-      </div>
-      <div id="takesList" class="takes-list">
-        <p class="takes-empty" id="takesEmpty">No takes yet — generate your first line and it'll be logged here.</p>
-      </div>
-    </section>
+    <footer class="border-t border-white/10 bg-[#060608] py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-display font-bold text-xl text-gray-300">
+                <span class="text-primary">◉</span> VoiceForge <span class="text-secondary">AI</span>
+            </div>
+            <div class="text-gray-500 text-sm">
+                © 2026 Voice AI Studio. All rights reserved.
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">Twitter</a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">GitHub</a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">Discord</a>
+            </div>
+        </div>
+    </footer>
 
-    <audio id="audioPlayer" hidden></audio>
-    <audio id="takeAudioPlayer" hidden></audio>
-  </main>
-</div>
-
-<script src="countries.js"></script>
-<script src="script.js"></script>
 </body>
 </html>

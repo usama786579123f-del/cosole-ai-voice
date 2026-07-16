@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .btn-gradient { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .text-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .plan-card { border: 1px solid rgba(255,255,255,0.08); transition: all 0.25s ease; }
+        .plan-card:hover { transform: translateY(-4px); }
+        .plan-card.popular { border: 1px solid #6D5BFF; box-shadow: 0 0 30px rgba(109,91,255,0.25); }
+
+        .toggle-switch { width: 48px; height: 26px; background: rgba(255,255,255,0.1); border-radius: 999px; position: relative; cursor: pointer; transition: background 0.3s ease; }
+        .toggle-switch.active { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .toggle-knob { width: 20px; height: 20px; background: #fff; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform 0.3s ease; }
+        .toggle-switch.active .toggle-knob { transform: translateX(22px); }
+
+        .faq-item { cursor: pointer; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 200px; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="sticky top-4 z-50 max-w-6xl mx-auto px-4">
+        <nav class="glass-card rounded-full px-6 py-3 flex items-center justify-between" style="backdrop-filter: blur(16px);">
+            <a href="index.html" class="font-display font-bold text-lg tracking-tight">
+                VOICEFORGE <span class="text-gradient">AI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="voice-library.html" class="hover:text-white transition-colors">Voices</a>
+                <a href="pricing.html" class="text-white">Pricing</a>
+                <a href="api.html" class="hover:text-white transition-colors">API</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-2">Login</a>
+                <a href="login.html" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:scale-105 transition-transform">Start Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16">
+
+        <!-- ===== HEADER ===== -->
+        <div class="text-center mb-10">
+            <h1 class="font-display font-bold text-3xl sm:text-4xl mb-3">Choose the Perfect Plan</h1>
+            <p class="text-gray-400 text-sm">Start free and upgrade anytime as your needs grow.</p>
+
+            <div class="flex items-center justify-center gap-3 mt-6">
+                <span class="text-sm font-medium" id="monthlyLabel">Monthly</span>
+                <div id="billingToggle" class="toggle-switch">
+                    <div class="toggle-knob"></div>
+                </div>
+                <span class="text-sm font-medium text-gray-500" id="yearlyLabel">Yearly <span class="text-secondary text-xs">(Save more)</span></span>
+            </div>
+        </div>
+
+        <!-- ===== PRICING CARDS ===== -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+
+            <!-- Free -->
+            <div class="plan-card glass-card rounded-2xl p-6">
+                <p class="text-2xl mb-2">🎙️</p>
+                <h3 class="font-semibold mb-1">Free</h3>
+                <p class="font-display font-bold text-3xl mb-4">$0<span class="text-sm text-gray-500 font-normal">/mo</span></p>
+                <ul class="space-y-2 text-xs text-gray-400 mb-6">
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> 10,000 characters/mo</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> 23 voices</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Standard quality</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Community support</li>
+                </ul>
+                <a href="login.html" class="block text-center bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Get It Now</a>
+            </div>
+
+            <!-- Starter -->
+            <div class="plan-card glass-card rounded-2xl p-6">
+                <p class="text-2xl mb-2">🚀</p>
+                <h3 class="font-semibold mb-1">Starter</h3>
+                <p class="font-display font-bold text-3xl mb-4">
+                    <span class="price-monthly">$5</span><span class="price-yearly hidden">$15</span>
+                    <span class="text-sm text-gray-500 font-normal billing-suffix">/mo</span>
+                </p>
+                <ul class="space-y-2 text-xs text-gray-400 mb-6">
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> 100,000 characters/mo</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> All voices</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> HD quality</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Email support</li>
+                </ul>
+                <a href="login.html" class="block text-center bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Get It Now</a>
+            </div>
+
+            <!-- Pro (Most Popular) -->
+            <div class="plan-card popular glass-card rounded-2xl p-6 relative">
+                <span class="absolute -top-3 right-4 btn-gradient text-white text-[10px] font-bold px-3 py-1 rounded-full">Most Popular</span>
+                <p class="text-2xl mb-2">👑</p>
+                <h3 class="font-semibold mb-1">Pro</h3>
+                <p class="font-display font-bold text-3xl mb-4">
+                    <span class="price-monthly">$10</span><span class="price-yearly hidden">$30</span>
+                    <span class="text-sm text-gray-500 font-normal billing-suffix">/mo</span>
+                </p>
+                <ul class="space-y-2 text-xs text-gray-400 mb-6">
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> 500,000 characters/mo</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> All voices + cloning</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Studio quality</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Priority support</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> API access</li>
+                </ul>
+                <a href="login.html" class="block text-center btn-gradient text-white text-sm font-semibold py-2.5 rounded-xl hover:scale-[1.02] transition-transform">Get It Now</a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="plan-card glass-card rounded-2xl p-6">
+                <p class="text-2xl mb-2">🏢</p>
+                <h3 class="font-semibold mb-1">Enterprise</h3>
+                <p class="font-display font-bold text-2xl mb-4">Contact Us</p>
+                <ul class="space-y-2 text-xs text-gray-400 mb-6">
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Unlimited characters</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Custom voice models</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Dedicated infrastructure</li>
+                    <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Dedicated manager</li>
+                </ul>
+                <a href="support.html" class="block text-center bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Get Started</a>
+            </div>
+        </div>
+
+        <!-- ===== COMPARISON TABLE ===== -->
+        <div class="glass-card rounded-2xl p-6 mb-16 overflow-x-auto">
+            <h2 class="font-display font-semibold text-lg mb-5">Compare Plans</h2>
+            <table class="w-full text-sm min-w-[500px]">
+                <thead>
+                    <tr class="text-left text-gray-500 text-xs border-b border-white/10">
+                        <th class="pb-3 font-medium">Feature</th>
+                        <th class="pb-3 font-medium text-center">Free</th>
+                        <th class="pb-3 font-medium text-center">Starter</th>
+                        <th class="pb-3 font-medium text-center text-primary">Pro</th>
+                        <th class="pb-3 font-medium text-center">Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5 text-xs text-gray-400">
+                    <tr><td class="py-3">Characters/mo</td><td class="text-center">10,000</td><td class="text-center">100,000</td><td class="text-center text-white">500,000</td><td class="text-center">Unlimited</td></tr>
+                    <tr><td class="py-3">Voices</td><td class="text-center">23</td><td class="text-center">All</td><td class="text-center text-white">All + Cloning</td><td class="text-center">Custom</td></tr>
+                    <tr><td class="py-3">API Access</td><td class="text-center">✕</td><td class="text-center">✕</td><td class="text-center text-secondary">✓</td><td class="text-center text-secondary">✓</td></tr>
+                    <tr><td class="py-3">Commercial Rights</td><td class="text-center">✕</td><td class="text-center text-secondary">✓</td><td class="text-center text-secondary">✓</td><td class="text-center text-secondary">✓</td></tr>
+                    <tr><td class="py-3">Priority Queue</td><td class="text-center">✕</td><td class="text-center">✕</td><td class="text-center text-secondary">✓</td><td class="text-center text-secondary">✓</td></tr>
+                    <tr><td class="py-3">Support</td><td class="text-center">Community</td><td class="text-center">Email</td><td class="text-center text-white">Priority</td><td class="text-center">Dedicated</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ===== CTA IMAGE ===== -->
+        <div class="glass-card rounded-2xl overflow-hidden mb-16">
+            <img src="images/pricing-cta.png" alt="Upgrade your plan" class="w-full h-48 object-cover opacity-80">
+        </div>
+
+        <!-- ===== FAQ ===== -->
+        <div>
+            <h2 class="font-display font-bold text-2xl text-center mb-8">FAQ</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+
+                <div class="faq-item glass-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">Can I cancel anytime?</p>
+                        <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-xs text-gray-400 mt-3">Yes, you can cancel your subscription anytime from your account settings. No questions asked.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">Refund policy?</p>
+                        <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-xs text-gray-400 mt-3">We offer a 7-day money-back guarantee on all paid plans if you're not satisfied.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">Can I upgrade later?</p>
+                        <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-xs text-gray-400 mt-3">Absolutely. You can upgrade or downgrade your plan at any time from your billing settings.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">Commercial usage?</p>
+                        <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-xs text-gray-400 mt-3">Starter and above plans include full commercial rights for generated audio.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-10 border-t border-white/10 mt-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 VoiceForge AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('billingToggle');
+        const monthlyLabel = document.getElementById('monthlyLabel');
+        const yearlyLabel = document.getElementById('yearlyLabel');
+        let isYearly = false;
+
+        toggle.addEventListener('click', () => {
+            isYearly = !isYearly;
+            toggle.classList.toggle('active', isYearly);
+
+            document.querySelectorAll('.price-monthly').forEach(el => el.classList.toggle('hidden', isYearly));
+            document.querySelectorAll('.price-yearly').forEach(el => el.classList.toggle('hidden', !isYearly));
+            document.querySelectorAll('.billing-suffix').forEach(el => el.textContent = isYearly ? '/yr' : '/mo');
+
+            monthlyLabel.classList.toggle('text-gray-500', isYearly);
+            monthlyLabel.classList.toggle('font-medium', !isYearly);
+            yearlyLabel.classList.toggle('text-gray-500', !isYearly);
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

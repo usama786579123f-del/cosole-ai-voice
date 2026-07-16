@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; overflow-x: hidden; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .btn-gradient { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .text-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ambient-light { position: absolute; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.25; }
+        .team-card:hover { transform: translateY(-4px); border-color: rgba(109,91,255,0.4); }
+        .team-card { transition: all 0.25s ease; }
+    </style>
+</head>
+<body class="relative">
+
+    <div class="ambient-light bg-primary w-[35rem] h-[35rem] top-[-10%] left-[-10%]"></div>
+    <div class="ambient-light bg-secondary w-[30rem] h-[30rem] top-[20%] right-[-10%]"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="sticky top-4 z-50 max-w-6xl mx-auto px-4">
+        <nav class="glass-card rounded-full px-6 py-3 flex items-center justify-between" style="backdrop-filter: blur(16px);">
+            <a href="index.html" class="font-display font-bold text-lg tracking-tight">
+                VOICEFORGE <span class="text-gradient">AI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="about.html" class="text-white">About</a>
+                <a href="voice-library.html" class="hover:text-white transition-colors">Voices</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="support.html" class="hover:text-white transition-colors">Support</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-2">Login</a>
+                <a href="login.html" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:scale-105 transition-transform">Start Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative max-w-6xl mx-auto px-4 py-16">
+
+        <!-- ===== HERO ===== -->
+        <div class="text-center max-w-2xl mx-auto mb-20">
+            <span class="text-xs font-semibold tracking-[0.2em] text-secondary uppercase">Our Story</span>
+            <h1 class="font-display font-bold text-3xl sm:text-4xl mt-3 mb-4">
+                We're building the future of <span class="text-gradient">human-like voice AI</span>
+            </h1>
+            <p class="text-gray-400 text-sm leading-relaxed">
+                VoiceForge AI started with a simple idea: realistic, expressive voice generation shouldn't be reserved for big studios with big budgets. Today, creators, developers, and businesses around the world use our platform to bring their words to life.
+            </p>
+        </div>
+
+        <!-- ===== HERO IMAGE ===== -->
+        <div class="mb-16 rounded-2xl overflow-hidden glass-card">
+            <img src="images/about-hero.png" alt="Our Team" class="w-full h-64 object-cover">
+        </div>
+
+        <!-- ===== STATS ===== -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-20">
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <p class="font-display font-bold text-2xl text-gradient">150+</p>
+                <p class="text-xs text-gray-500 mt-1">Voices Available</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <p class="font-display font-bold text-2xl text-gradient">40+</p>
+                <p class="text-xs text-gray-500 mt-1">Languages Supported</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <p class="font-display font-bold text-2xl text-gradient">1M+</p>
+                <p class="text-xs text-gray-500 mt-1">Voices Generated</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <p class="font-display font-bold text-2xl text-gradient">99.9%</p>
+                <p class="text-xs text-gray-500 mt-1">Uptime</p>
+            </div>
+        </div>
+
+        <!-- ===== MISSION ===== -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-20">
+            <div>
+                <span class="text-xs font-semibold tracking-[0.2em] text-secondary uppercase">Our Mission</span>
+                <h2 class="font-display font-bold text-2xl mt-3 mb-4">Making expressive AI voices accessible to everyone</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    We believe great voice technology should be affordable, fast, and easy to use — not locked behind enterprise contracts. That's why we built VoiceForge AI: a platform where anyone, from indie podcasters to global enterprises, can generate studio-quality speech in seconds.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Our neural voice models are trained to capture natural intonation, emotion, and rhythm — so the audio you generate doesn't just sound like text-to-speech, it sounds human.
+                </p>
+            </div>
+            <div class="glass-card rounded-2xl p-8">
+                <div class="space-y-5">
+                    <div class="flex items-start gap-3">
+                        <span class="text-secondary text-lg">◆</span>
+                        <div>
+                            <p class="text-sm font-semibold mb-1">Accessible Pricing</p>
+                            <p class="text-xs text-gray-500">Plans starting at just $5/month — no hidden fees.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-secondary text-lg">◆</span>
+                        <div>
+                            <p class="text-sm font-semibold mb-1">Studio-Grade Quality</p>
+                            <p class="text-xs text-gray-500">Neural synthesis with natural emotion and pacing.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-secondary text-lg">◆</span>
+                        <div>
+                            <p class="text-sm font-semibold mb-1">Developer Friendly</p>
+                            <p class="text-xs text-gray-500">Simple API, clear docs, fast integration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== VALUES ===== -->
+        <div class="mb-20">
+            <p class="text-center text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase mb-8">What We Stand For</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <p class="text-2xl mb-3">🎯</p>
+                    <h3 class="font-semibold text-sm mb-2">Simplicity</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">No steep learning curve. Type text, pick a voice, generate.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <p class="text-2xl mb-3">🔒</p>
+                    <h3 class="font-semibold text-sm mb-2">Trust & Privacy</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Your text and audio stay yours. We never sell your data.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <p class="text-2xl mb-3">⚡</p>
+                    <h3 class="font-semibold text-sm mb-2">Speed</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Real-time generation — no waiting rooms, no queues.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CTA ===== -->
+        <div class="glass-card rounded-2xl p-10 text-center" style="background: linear-gradient(135deg, rgba(109,91,255,0.15), rgba(0,212,255,0.1));">
+            <h2 class="font-display font-bold text-2xl mb-3">Ready to bring your words to life?</h2>
+            <p class="text-gray-400 text-sm mb-6">Join thousands of creators already using VoiceForge AI.</p>
+            <a href="login.html" class="btn-gradient text-white font-semibold px-7 py-3.5 rounded-full hover:scale-105 transition-transform inline-block shadow-[0_0_25px_rgba(109,91,255,0.4)]">
+                Start Free Now
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-10 border-t border-white/10 mt-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 VoiceForge AI. All rights reserved.</p>
+        <div class="flex justify-center gap-6 mt-3">
+            <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+            <a href="support.html" class="hover:text-white transition-colors">Support</a>
+        </div>
+    </footer>
+
+</body>
+</html>

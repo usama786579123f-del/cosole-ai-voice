@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            box-shadow: 0 4px 15px rgba(109, 91, 255, 0.35), 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gradient:hover {
+            box-shadow: 0 6px 20px rgba(109, 91, 255, 0.5), 0 3px 8px rgba(0,0,0,0.25);
+            transform: translateY(-2px);
+        }
+        .btn-gradient:active { transform: translateY(0px) scale(0.97); }
+
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(109, 91, 255, 0.12); color: #fff; }
+        .sidebar-link.active { border-left: 3px solid #6D5BFF; }
+        .cover-banner {
+            background: linear-gradient(135deg, rgba(109,91,255,0.3), rgba(0,212,255,0.2));
+            height: 120px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="w-64 bg-surface border-r border-white/10 flex flex-col fixed h-full">
+        <div class="px-6 py-5 flex items-center gap-2 border-b border-white/10">
+            <span class="text-primary text-lg">◉</span>
+            <span class="font-display font-bold">VoiceForge AI</span>
+        </div>
+
+        <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+            <a href="dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Dashboard
+            </a>
+            <a href="generator.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0-11a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                Text to Speech
+            </a>
+            <a href="voice-library.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7"></path><circle cx="12" cy="7" r="3" stroke-width="2"></circle></svg>
+                Voice Library
+            </a>
+            <a href="my-projects.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                My Projects
+            </a>
+            <a href="history.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                History
+            </a>
+            <a href="api.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16M6 8l-4 4 4 4m12-8l4 4-4 4"></path></svg>
+                API Keys
+            </a>
+            <a href="pricing.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 10v2"></path></svg>
+                Pricing
+            </a>
+        </nav>
+
+        <div class="px-3 py-4 border-t border-white/10 space-y-1 text-sm">
+            <a href="docs.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Documentation
+            </a>
+            <a href="settings.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                Settings
+            </a>
+            <a href="profile.html" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                Profile
+            </a>
+            <a href="support.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M9.172 9.172a4 4 0 015.656 0M12 12h.01M6.343 6.343a9 9 0 000 12.728l2.829-2.829"></path></svg>
+                Help & Support
+            </a>
+            <button id="logoutBtn" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 text-left">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="ml-64 flex-1 flex flex-col">
+
+        <header class="flex items-center justify-between px-8 py-4 border-b border-white/10">
+            <h1 class="font-display font-bold text-xl">Profile</h1>
+            <a href="settings.html" class="text-sm text-primary font-medium hover:text-secondary transition-colors">Edit Profile →</a>
+        </header>
+
+        <main class="p-8 max-w-4xl">
+
+            <!-- Cover + Avatar -->
+            <div class="glass-card rounded-2xl overflow-hidden mb-6">
+                <div class="cover-banner"></div>
+                <div class="px-6 pb-6 -mt-10 flex items-end gap-4">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl font-bold border-4 border-surface" id="avatarBig">A</div>
+                    <div class="pb-1">
+                        <h2 class="font-display font-bold text-xl" id="profileName">User</h2>
+                        <p class="text-xs text-gray-500" id="profileEmail">email@example.com</p>
+                    </div>
+                    <span class="ml-auto mb-1 btn-gradient text-white text-xs font-semibold px-3 py-1.5 rounded-full" id="planBadge">Free Plan</span>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="font-display font-bold text-2xl" id="statTotalGens">0</p>
+                    <p class="text-xs text-gray-500 mt-1">Total Generations</p>
+                </div>
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="font-display font-bold text-2xl" id="statTotalChars">0</p>
+                    <p class="text-xs text-gray-500 mt-1">Characters Used</p>
+                </div>
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="font-display font-bold text-2xl" id="statMemberSince">-</p>
+                    <p class="text-xs text-gray-500 mt-1">Member Since</p>
+                </div>
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="font-display font-bold text-2xl" id="statRole">User</p>
+                    <p class="text-xs text-gray-500 mt-1">Account Type</p>
+                </div>
+            </div>
+
+            <!-- Account Info -->
+            <div class="glass-card rounded-2xl p-6 mb-6">
+                <h3 class="font-semibold mb-4">Account Information</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Full Name</p>
+                        <p id="infoName">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Email Address</p>
+                        <p id="infoEmail">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Account Role</p>
+                        <p id="infoRole">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Joined On</p>
+                        <p id="infoJoined">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold">Recent Activity</h3>
+                    <a href="history.html" class="text-xs text-primary font-medium">View All →</a>
+                </div>
+                <div id="recentActivity" class="space-y-3 text-sm">
+                    <p class="text-xs text-gray-500">Loading...</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+
+        if (!token || !userStr) {
+            window.location.href = 'login.html';
+        }
+
+        async function loadProfile() {
+            try {
+                const res = await fetch('/api/user/profile', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (res.ok && data.user) {
+                    const user = data.user;
+                    document.getElementById('avatarBig').textContent = user.name.charAt(0).toUpperCase();
+                    document.getElementById('profileName').textContent = user.name;
+                    document.getElementById('profileEmail').textContent = user.email;
+                    document.getElementById('planBadge').textContent = user.role === 'admin' ? 'Admin' : 'Free Plan';
+
+                    document.getElementById('infoName').textContent = user.name;
+                    document.getElementById('infoEmail').textContent = user.email;
+                    document.getElementById('infoRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+                    document.getElementById('statRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+
+                    if (user.createdAt) {
+                        const joinedDate = new Date(user.createdAt);
+                        document.getElementById('infoJoined').textContent = joinedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                        document.getElementById('statMemberSince').textContent = joinedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+                    }
+                }
+            } catch (err) {
+                console.error('Could not load profile', err);
+            }
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/history', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (res.ok && data.history) {
+                    document.getElementById('statTotalGens').textContent = data.history.length;
+                    const totalChars = data.history.reduce((sum, item) => sum + (item.text ? item.text.length : 0), 0);
+                    document.getElementById('statTotalChars').textContent = totalChars.toLocaleString();
+
+                    const activityContainer = document.getElementById('recentActivity');
+                    if (data.history.length === 0) {
+                        activityContainer.innerHTML = '<p class="text-xs text-gray-500">No activity yet. <a href="generator.html" class="text-primary">Generate your first voice →</a></p>';
+                    } else {
+                        activityContainer.innerHTML = data.history.slice(0, 5).map(item => `
+                            <div class="flex items-center gap-3 pb-3 border-b border-white/5 last:border-0">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs">🎙️</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs text-gray-300 truncate">${(item.text || '').substring(0, 50)}...</p>
+                                    <p class="text-[10px] text-gray-600">${new Date(item.createdAt).toLocaleString()}</p>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (err) {
+                console.error('Could not load stats', err);
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+
+        loadProfile();
+        loadStats();
+    </script>
+
+</body>
+</html>

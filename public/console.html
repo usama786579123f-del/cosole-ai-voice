@@ -1,164 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Console — Voice AI Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceForge AI — Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #09090B; }
+        .glass { background: rgba(24, 24, 27, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-link { transition: all 0.2s; color: #A1A1AA; }
+        .sidebar-link:hover, .sidebar-link.active { color: #fff; background: rgba(109, 91, 255, 0.15); border-left: 2px solid #6D5BFF; }
+    </style>
 </head>
-<body>
+<body class="flex h-screen text-white overflow-hidden">
 
-<div class="console">
-
-  <!-- ============ SIDEBAR: Cast ============ -->
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-mark">◉</span>
-      <div>
-        <h1>Console</h1>
-        <p class="brand-sub">Voice AI Studio</p>
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">
-        <span>Cast</span>
-        <span id="voiceCount" class="mono-meta">—</span>
-      </div>
-
-      <div class="voice-filters">
-        <input type="text" id="voiceSearch" class="voice-search" placeholder="Search voices…" autocomplete="off" />
-      </div>
-      <div class="voice-filters">
-        <select id="languageFilter" class="voice-lang-filter">
-          <option value="">All languages</option>
-        </select>
-        <select id="countryFilter" class="voice-lang-filter">
-          <option value="">All countries</option>
-        </select>
-      </div>
-
-      <div id="voiceGrid" class="voice-grid">
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-        <div class="voice-card skeleton"></div>
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      <span id="apiStatusDot" class="status-dot"></span>
-      <span id="apiStatusText">Connecting…</span>
-      <span class="sidebar-user" id="sidebarUser"></span>
-    </div>
-  </aside>
-
-  <!-- ============ MAIN: Console ============ -->
-  <main class="main">
-
-    <header class="topbar">
-      <div class="topbar-voice" id="selectedVoiceBadge">
-        <span class="topbar-voice-avatar" id="selectedVoiceAvatar">?</span>
-        <div>
-          <p class="topbar-voice-name" id="selectedVoiceName">Select a voice</p>
-          <p class="topbar-voice-lang" id="selectedVoiceLang">—</p>
+    <!-- LEFT SIDEBAR -->
+    <aside class="w-64 glass hidden md:flex flex-col p-6 border-r border-white/5">
+        <div class="flex items-center gap-2 mb-10 px-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary"></div>
+            <span class="font-bold text-lg tracking-tight">VoiceForge</span>
         </div>
-      </div>
-      <div class="on-air" id="onAirLamp">
-        <span class="on-air-dot"></span>
-        <span class="on-air-label">ON AIR</span>
-        <span class="on-air-time" id="onAirTime">00:00</span>
-      </div>
-    </header>
+        
+        <nav class="flex-1 space-y-1">
+            <a href="#" class="sidebar-link active block px-4 py-2.5 rounded-lg text-sm">Dashboard</a>
+            <a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg text-sm">Text to Speech</a>
+            <a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg text-sm">Voice Library</a>
+            <a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg text-sm">My Projects</a>
+        </nav>
 
-    <!-- Signature element: signal bay / oscilloscope -->
-    <section class="scope-panel">
-      <div class="scope-bezel-label">
-        <span>SIGNAL</span>
-        <span id="scopeStatus">IDLE</span>
-      </div>
-      <canvas id="scope" class="scope-canvas"></canvas>
-      <div class="scope-ruler" aria-hidden="true">
-        <span>−1</span><span>0</span><span>+1</span>
-      </div>
-      <div class="scope-overlay" id="scopeIdle">Sound comes alive here — generate a line to see it</div>
-    </section>
-
-    <!-- Emotion / speed controls -->
-    <section class="reaction-rail">
-      <div class="rail-group">
-        <p class="rail-label">Emotion</p>
-        <!-- NOTE: only emotions Cartesia's API actually accepts are listed here
-             ("scared" was removed — Cartesia rejects it with a 400 "invalid
-             emotion" error, which is what was blocking every generation
-             that had it selected). Keep this list in sync with
-             SUPPORTED_EMOTIONS in server.js. -->
-        <div class="reaction-chips" id="emotionChips">
-          <button class="chip active" data-emotion="">Neutral</button>
-          <button class="chip" data-emotion="excited">Excited</button>
-          <button class="chip" data-emotion="content">Content</button>
-          <button class="chip" data-emotion="sad">Sad</button>
-          <button class="chip" data-emotion="angry">Angry</button>
+        <div class="glass p-4 rounded-xl mt-auto">
+            <p class="text-[11px] text-gray-500 uppercase tracking-wider mb-2">Credits Remaining</p>
+            <div class="text-xl font-semibold mb-3">8,450 <span class="text-sm text-gray-500">/ 10k</span></div>
+            <button class="w-full py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-gray-200">Upgrade Pro</button>
         </div>
-      </div>
-      <div class="rail-group">
-        <p class="rail-label">Speed</p>
-        <div class="reaction-chips" id="speedChips">
-          <button class="chip" data-speed="slow">Slow</button>
-          <button class="chip active" data-speed="normal">Normal</button>
-          <button class="chip" data-speed="fast">Fast</button>
+    </aside>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="flex-1 overflow-y-auto p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-semibold">Welcome back, User</h1>
+                <p class="text-gray-500 text-sm">Ready to create something amazing?</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" placeholder="Search projects..." class="bg-surface glass px-4 py-2 rounded-lg text-sm border border-white/10 outline-none w-64">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary"></div>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass p-5 rounded-2xl">
+                <p class="text-gray-500 text-xs mb-1">Total Generated</p>
+                <h3 class="text-2xl font-bold">124</h3>
+            </div>
+            <!-- Duplicate this for other stats -->
+            <div class="glass p-5 rounded-2xl"><p class="text-gray-500 text-xs mb-1">Characters</p><h3 class="text-2xl font-bold">45k</h3></div>
         </div>
-      </div>
-      <div class="rail-group">
-        <p class="rail-label">Extra</p>
-        <div class="reaction-chips">
-          <button class="chip" id="laughterToggle" type="button">+ Laughter</button>
+
+        <!-- GENERATOR CARD -->
+        <section class="glass p-8 rounded-3xl mb-8">
+            <textarea id="scriptInput" class="w-full bg-transparent border-none text-lg resize-none outline-none mb-6" placeholder="Enter your text here..."></textarea>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm hover:bg-white/10">Voice: Professional</button>
+                    <button class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm hover:bg-white/10">Emotion: Excited</button>
+                </div>
+                <button id="generateBtn" class="bg-primary px-8 py-3 rounded-xl font-semibold hover:shadow-[0_0_20px_rgba(109,91,255,0.4)] transition-all">Generate Voice</button>
+            </div>
+        </section>
+
+        <!-- Recent Projects -->
+        <h2 class="text-lg font-semibold mb-4">Recent Projects</h2>
+        <div class="glass rounded-2xl overflow-hidden">
+            <table class="w-full text-sm text-left">
+                <thead class="text-gray-500 border-b border-white/5">
+                    <tr><th class="p-4">Project Name</th><th class="p-4">Date</th><th class="p-4">Status</th></tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr><td class="p-4">Marketing Video AI</td><td class="p-4">July 12, 2026</td><td class="p-4 text-green-500">Completed</td></tr>
+                </tbody>
+            </table>
         </div>
-      </div>
-    </section>
-
-    <!-- Script input -->
-    <section class="script-panel">
-      <label class="script-label" for="scriptInput">Script</label>
-      <textarea id="scriptInput" placeholder="Type your script here... it comes to life in the character's voice." maxlength="900"></textarea>
-      <div class="script-footer">
-        <span id="charCount" class="mono-meta">0 / 900</span>
-        <button id="generateBtn" class="btn-generate">
-          <span class="btn-generate-icon">▶</span> Generate Voice
-        </button>
-      </div>
-    </section>
-
-    <!-- Playback -->
-    <section class="playback-panel" id="playbackPanel" hidden>
-      <button id="playBtn" class="play-btn">▶</button>
-      <div class="playback-track">
-        <div class="playback-progress" id="playbackProgress"></div>
-      </div>
-      <span id="playbackTime" class="mono-meta">0:00</span>
-      <a id="downloadBtn" class="btn-mini" download="voice-line.wav">Download</a>
-    </section>
-
-    <!-- Takes: generation history, logged like a session tape -->
-    <section class="takes-panel">
-      <div class="sidebar-label">
-        <span>Take Log</span>
-        <button id="clearTakesBtn" class="btn-mini" title="Clear all takes">Clear</button>
-      </div>
-      <div id="takesList" class="takes-list">
-        <p class="takes-empty" id="takesEmpty">No takes yet — generate your first line and it'll be logged here.</p>
-      </div>
-    </section>
-
-    <audio id="audioPlayer" hidden></audio>
-    <audio id="takeAudioPlayer" hidden></audio>
-  </main>
-</div>
-
-<script src="countries.js"></script>
-<script src="script.js"></script>
+    </main>
 </body>
 </html>

@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoiceForge AI — Premium Text-to-Speech</title>
-    
+    <title>VoiceForge AI - Forge Realistic AI Voices in Seconds</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         background: '#09090B',
+                        surface: '#18181B',
                         primary: '#6D5BFF',
                         secondary: '#00D4FF',
-                        card: '#18181B'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,171 +30,261 @@
     </script>
 
     <style>
-        /* Custom Glassmorphism Utility */
-        .glass-card {
-            background: rgba(24, 24, 27, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+        body { background-color: #09090B; color: #FFFFFF; overflow-x: hidden; }
+        .hero-bg-video {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -2;
+            pointer-events: none;
         }
-        
+
+        .glass-nav {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
         .text-gradient {
             background: linear-gradient(135deg, #6D5BFF, #00D4FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .blob {
+        .btn-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+        }
+
+        .ambient-light {
             position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.4;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(109, 91, 255, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .dashboard-mockup {
+            background: rgba(24, 24, 27, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .waveform-bar {
+            width: 3px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, #00D4FF, #6D5BFF);
+        }
+
+        .float-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            opacity: 0.7;
+            filter: blur(1px);
             animation: float 6s ease-in-out infinite;
         }
-
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
+
+        .logo-grayscale {
+            filter: grayscale(1) opacity(0.5);
+            transition: filter 0.3s ease;
+        }
+        .logo-grayscale:hover { filter: grayscale(0) opacity(1); }
     </style>
 </head>
-<body class="bg-background text-white font-sans antialiased overflow-x-hidden">
+<body class="relative">
 
-    <div class="blob bg-primary w-96 h-96 rounded-full top-0 left-[-10%]"></div>
-    <div class="blob bg-secondary w-96 h-96 rounded-full top-[20%] right-[-10%] animation-delay-2000"></div>
+    <video class="hero-bg-video" autoplay loop muted playsinline>
+        <source src="videos/hero-loop.mp4" type="video/mp4">
+    </video>
 
-    <nav class="fixed w-full z-50 glass-card !rounded-none !border-x-0 !border-t-0 border-b border-white/10 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 font-display text-xl font-bold tracking-tight">
-                <span class="text-primary">◉</span> VoiceForge <span class="text-secondary">AI</span>
-            </div>
-            <div class="hidden md:flex gap-8 text-sm text-gray-400 font-medium">
-                <a href="#features" class="hover:text-white transition-colors">Features</a>
-                <a href="#showcase" class="hover:text-white transition-colors">Voices</a>
-                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
-            </div>
-            <a href="login.html" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-[20px] text-sm font-medium transition-all backdrop-blur-md border border-white/10">
-                Sign In
+    <!-- Ambient backgrounds -->
+    <div class="ambient-light bg-primary w-[35rem] h-[35rem] top-[-10%] left-[-10%]"></div>
+    <div class="ambient-light bg-secondary w-[30rem] h-[30rem] top-[10%] right-[-10%]"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="sticky top-4 z-50 max-w-6xl mx-auto px-4">
+        <nav class="glass-nav rounded-full px-6 py-3 flex items-center justify-between">
+            <a href="index.html" class="font-display font-bold text-lg tracking-tight">
+                VOICEFORGE <span class="text-gradient">AI</span>
             </a>
-        </div>
-    </nav>
 
-    <section class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 min-h-screen">
-        <div class="flex-1 text-center lg:text-left z-10">
-            <div class="inline-block glass-card px-4 py-1.5 mb-6 text-xs font-medium text-secondary border-secondary/30">
-                ✨ The Next Generation of Speech Synthesis
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#" class="hover:text-white transition-colors flex items-center gap-1">Platform
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <a href="#" class="hover:text-white transition-colors flex items-center gap-1">Solutions
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <a href="voice-library.html" class="hover:text-white transition-colors">Voices</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="api.html" class="hover:text-white transition-colors">API</a>
             </div>
-            <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-                Breathe Life into <br> 
-                <span class="text-gradient">Every Word.</span>
+
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-2">Login</a>
+                <a href="login.html" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(109,91,255,0.4)]">
+                    Start Free
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="relative max-w-6xl mx-auto px-4 pt-16 sm:pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="relative z-10">
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+                <span class="text-gradient">FORGE REALISTIC AI</span><br>
+                <span class="text-gradient">VOICES IN SECONDS.</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Generate hyper-realistic, human-like voiceovers in milliseconds. Powered by advanced AI, designed for creators, developers, and global brands.
+            <p class="mt-6 text-gray-400 text-base sm:text-lg max-w-lg">
+                VoiceForge AI delivers premium, human-like speech from text. Explore natural synthesis for games, podcasts, videos, and more with effortless control and scalability.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-medium px-8 py-4 rounded-[20px] hover:scale-105 transition-transform shadow-[0_0_30px_rgba(109,91,255,0.4)] flex items-center justify-center gap-2">
-                    Start Free Trial <span>→</span>
+
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="login.html" class="btn-gradient text-white font-semibold px-7 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_25px_rgba(109,91,255,0.4)]">
+                    Start Free Now
                 </a>
-                <a href="#demo" class="glass-card text-white font-medium px-8 py-4 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium px-6 py-3.5 rounded-full transition-colors">
                     Watch Demo
-                </a>
+                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
             </div>
         </div>
 
-        <div class="flex-1 relative w-full z-10 perspective-1000">
-            <div class="glass-card p-2 transform rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-all duration-700 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" alt="Dashboard Preview" class="rounded-[16px] w-full h-auto opacity-80 mix-blend-screen" />
-                
-                <div class="absolute -left-6 top-1/4 glass-card p-4 flex items-center gap-3 animate-bounce shadow-xl">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">🎵</div>
-                    <div>
-                        <div class="text-xs text-gray-400">Generating...</div>
-                        <div class="text-sm font-medium">"Welcome to VoiceForge"</div>
+        <!-- Dashboard mockup -->
+        <div class="relative">
+            <div class="float-orb w-16 h-16 -top-8 -left-4"></div>
+            <div class="float-orb w-6 h-6 top-1/3 -right-2"></div>
+            <div class="float-orb w-10 h-10 -bottom-6 right-1/4"></div>
+
+            <div class="dashboard-mockup p-4 relative z-10">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+                    <span class="text-xs font-semibold text-gray-300 flex items-center gap-2">
+                        <span class="text-primary">◉</span> VOICEFORGE AI — AI Dashboard
+                    </span>
+                    <div class="flex gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-400/60"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
                     </div>
+                </div>
+
+                <div class="bg-white/5 rounded-xl p-3 mb-4 text-xs text-gray-400 leading-relaxed">
+                    VoiceForge AI delivers premium, human-like speech from text. Explore natural synthesis for games, podcasts, videos, and more.
+                </div>
+
+                <!-- Waveform -->
+                <div class="flex items-end gap-[3px] h-20 mb-4 px-1">
+                    <!-- generated bars -->
+                    <script>document.write(Array.from({length: 60}).map(() => `<div class="waveform-bar" style="height:${10 + Math.random()*80}%"></div>`).join(''));</script>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-gray-400 bg-white/5 rounded-xl p-3">
+                    <span>Aria · Female</span>
+                    <span class="flex items-center gap-4">
+                        <span>1.2s Render</span>
+                        <span>44.1kHz Audio</span>
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-10 border-y border-white/5 bg-white/[0.02]">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-xs text-gray-500 uppercase tracking-widest mb-6 font-medium">Trusted by innovative teams worldwide</p>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <span class="font-display font-bold text-xl">Acme Corp</span>
-                <span class="font-display font-bold text-xl">GlobalMedia</span>
-                <span class="font-display font-bold text-xl">TechNova</span>
-                <span class="font-display font-bold text-xl">StudioX</span>
-                <span class="font-display font-bold text-xl">NextGen AI</span>
+    <!-- ===== TRUSTED BY ===== -->
+    <section class="max-w-6xl mx-auto px-4 py-12 text-center">
+        <p class="text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase mb-8">Trusted by leading innovators</p>
+        <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+            <span class="logo-grayscale font-display font-bold text-xl">Spotify</span>
+            <span class="logo-grayscale font-display font-bold text-xl">NETFLIX</span>
+            <span class="logo-grayscale font-display font-bold text-xl">Google</span>
+            <span class="logo-grayscale font-display font-bold text-xl">amazon</span>
+            <span class="logo-grayscale font-display font-bold text-xl">OpenAI</span>
+            <span class="logo-grayscale font-display font-bold text-xl">NVIDIA</span>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <p class="text-center text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase mb-8">Features</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-4 text-primary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">Neural Voice Synthesis</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Human-like quality, adaptive intonation</p>
+            </div>
+
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 text-secondary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">150+ Global Voices</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Multilingual, diverse accents</p>
+            </div>
+
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-4 text-primary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">Custom Voice Cloning</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Create unique voice profiles</p>
+            </div>
+
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 text-secondary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">Real-time Rendering</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Instant audio generation</p>
+            </div>
+
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-4 text-primary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">Developer API</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Seamless integration with docs</p>
+            </div>
+
+            <div class="feature-card rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 text-secondary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                </div>
+                <h3 class="font-semibold text-sm mb-1">Advanced Controls</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Emotion, pitch, speed fine-tuning</p>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-24 px-6 max-w-7xl mx-auto relative">
-        <div class="text-center mb-16">
-            <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Unmatched <span class="text-gradient">Capabilities</span></h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">Everything you need to create studio-quality voiceovers, engineered into a single, lightning-fast platform.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-primary/20 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">⚡</div>
-                <h3 class="text-xl font-semibold mb-3">Ultra-Low Latency</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Generate up to 1 hour of audio in less than 3 seconds. Perfect for real-time applications.</p>
-            </div>
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-secondary/20 flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">🌍</div>
-                <h3 class="text-xl font-semibold mb-3">150+ Languages</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Reach a global audience with native-sounding accents across over 150 languages and dialects.</p>
-            </div>
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-purple-500/20 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">🎭</div>
-                <h3 class="text-xl font-semibold mb-3">Emotion Control</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Direct the performance. Switch seamlessly between sad, excited, angry, or whispering tones.</p>
-            </div>
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-pink-500/20 flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform">🎙️</div>
-                <h3 class="text-xl font-semibold mb-3">Voice Cloning</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Clone any voice with just 30 seconds of audio. Achieve 99% accuracy instantly.</p>
-            </div>
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-blue-500/20 flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">🎛️</div>
-                <h3 class="text-xl font-semibold mb-3">Advanced Mixer</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Tweak pacing, pronunciation, and pitch with our professional built-in studio console.</p>
-            </div>
-            <div class="glass-card p-8 hover:-translate-y-2 transition-transform duration-300 group">
-                <div class="w-12 h-12 rounded-[14px] bg-green-500/20 flex items-center justify-center mb-6 text-green-400 group-hover:scale-110 transition-transform">💻</div>
-                <h3 class="text-xl font-semibold mb-3">Developer API</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Integrate VoiceForge into your own apps with our robust, heavily documented REST API.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 relative overflow-hidden">
-        <div class="blob bg-secondary w-full h-64 rounded-full bottom-[-50%] opacity-20 blur-[100px]"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center z-10 relative">
-            <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Ready to create magic?</h2>
-            <p class="text-gray-400 mb-10 text-lg">Join 100,000+ creators building the future of audio today. No credit card required.</p>
-            <a href="login.html" class="inline-flex bg-white text-black font-semibold px-10 py-4 rounded-[20px] hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                Enter The Studio
-            </a>
-        </div>
-    </section>
-
-    <footer class="border-t border-white/10 bg-[#060608] py-12 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="font-display font-bold text-xl text-gray-300">
-                <span class="text-primary">◉</span> VoiceForge <span class="text-secondary">AI</span>
-            </div>
-            <div class="text-gray-500 text-sm">
-                © 2026 Voice AI Studio. All rights reserved.
-            </div>
-            <div class="flex gap-4">
-                <a href="#" class="text-gray-500 hover:text-white transition-colors">Twitter</a>
-                <a href="#" class="text-gray-500 hover:text-white transition-colors">GitHub</a>
-                <a href="#" class="text-gray-500 hover:text-white transition-colors">Discord</a>
-            </div>
+    <!-- ===== FOOTER (basic) ===== -->
+    <footer class="max-w-6xl mx-auto px-4 py-10 border-t border-white/10 mt-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 VoiceForge AI. All rights reserved.</p>
+        <div class="flex justify-center gap-6 mt-3">
+            <a href="about.html" class="hover:text-white transition-colors">About</a>
+            <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+            <a href="support.html" class="hover:text-white transition-colors">Support</a>
         </div>
     </footer>
 

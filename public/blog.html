@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .btn-gradient { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .text-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .blog-card { transition: all 0.25s ease; }
+        .blog-card:hover { transform: translateY(-4px); border-color: rgba(109,91,255,0.4); }
+        .blog-cover {
+            height: 160px;
+            background: linear-gradient(135deg, rgba(109,91,255,0.25), rgba(0,212,255,0.15));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem;
+        }
+        .category-pill { transition: all 0.2s ease; cursor: pointer; }
+        .category-pill.active { background: linear-gradient(135deg, #6D5BFF, #00D4FF); color: #fff; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="sticky top-4 z-50 max-w-6xl mx-auto px-4">
+        <nav class="glass-card rounded-full px-6 py-3 flex items-center justify-between" style="backdrop-filter: blur(16px);">
+            <a href="index.html" class="font-display font-bold text-lg tracking-tight">
+                VOICEFORGE <span class="text-gradient">AI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="blog.html" class="text-white">Blog</a>
+                <a href="voice-library.html" class="hover:text-white transition-colors">Voices</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-2">Login</a>
+                <a href="login.html" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:scale-105 transition-transform">Start Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16">
+
+        <div class="text-center mb-10">
+            <span class="text-xs font-semibold tracking-[0.2em] text-secondary uppercase">Insights</span>
+            <h1 class="font-display font-bold text-3xl sm:text-4xl mt-3 mb-3">The VoiceForge Blog</h1>
+            <p class="text-gray-400 text-sm">Tips, tutorials, and news on AI voice technology.</p>
+        </div>
+
+        <!-- Categories -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <span class="category-pill active glass-card px-4 py-2 rounded-full text-xs font-medium">All</span>
+            <span class="category-pill glass-card px-4 py-2 rounded-full text-xs font-medium">Tutorials</span>
+            <span class="category-pill glass-card px-4 py-2 rounded-full text-xs font-medium">Product Updates</span>
+            <span class="category-pill glass-card px-4 py-2 rounded-full text-xs font-medium">Use Cases</span>
+            <span class="category-pill glass-card px-4 py-2 rounded-full text-xs font-medium">Industry News</span>
+        </div>
+
+        <!-- Featured Post -->
+        <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden grid grid-cols-1 sm:grid-cols-2 mb-10 block">
+            <div class="blog-cover" style="background-image:url('images/blog-voice-cloning.png'); background-size:cover; background-position:center; font-size:0;"></div>
+            <div class="p-6 flex flex-col justify-center">
+                <span class="text-xs text-secondary font-semibold mb-2">Product Updates</span>
+                <h2 class="font-display font-bold text-xl mb-2">Introducing Voice Cloning: Create Your Own Custom Voice</h2>
+                <p class="text-sm text-gray-400 mb-4">We're excited to launch custom voice cloning for Pro subscribers — record a short sample and generate speech in your own voice.</p>
+                <span class="text-xs text-gray-500">July 5, 2026 · 4 min read</span>
+            </div>
+        </a>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover" style="background-image:url('images/blog-tutorial.png'); background-size:cover; background-position:center; font-size:0;"></div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Tutorials</span>
+                    <h3 class="font-semibold text-sm mb-2">How to Generate Natural-Sounding Narration for Audiobooks</h3>
+                    <p class="text-xs text-gray-500 mb-3">A step-by-step guide to picking the right voice, pacing, and emotion settings.</p>
+                    <span class="text-[10px] text-gray-600">June 28, 2026 · 6 min read</span>
+                </div>
+            </a>
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover" style="background-image:url('images/blog-usecase.png'); background-size:cover; background-position:center; font-size:0;"></div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Use Cases</span>
+                    <h3 class="font-semibold text-sm mb-2">5 Ways YouTubers Are Using AI Voices to Scale Content</h3>
+                    <p class="text-xs text-gray-500 mb-3">From voiceovers to multilingual dubbing — real examples from our creator community.</p>
+                    <span class="text-[10px] text-gray-600">June 20, 2026 · 5 min read</span>
+                </div>
+            </a>
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover" style="background-image:url('images/blog-news.png'); background-size:cover; background-position:center; font-size:0;"></div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Industry News</span>
+                    <h3 class="font-semibold text-sm mb-2">The State of AI Voice Technology in 2026</h3>
+                    <p class="text-xs text-gray-500 mb-3">A look at how neural speech synthesis has evolved and what's coming next.</p>
+                    <span class="text-[10px] text-gray-600">June 12, 2026 · 8 min read</span>
+                </div>
+            </a>
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover">🛠️</div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Tutorials</span>
+                    <h3 class="font-semibold text-sm mb-2">Integrating the VoiceForge API into Your App in 10 Minutes</h3>
+                    <p class="text-xs text-gray-500 mb-3">A quick-start developer guide with code samples for your first API call.</p>
+                    <span class="text-[10px] text-gray-600">June 5, 2026 · 7 min read</span>
+                </div>
+            </a>
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover">📊</div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Use Cases</span>
+                    <h3 class="font-semibold text-sm mb-2">How Businesses Use AI Voice for Customer Support IVR</h3>
+                    <p class="text-xs text-gray-500 mb-3">Cutting call center costs with natural-sounding automated voice systems.</p>
+                    <span class="text-[10px] text-gray-600">May 29, 2026 · 5 min read</span>
+                </div>
+            </a>
+
+            <a href="#" class="blog-card glass-card rounded-2xl overflow-hidden block">
+                <div class="blog-cover">✨</div>
+                <div class="p-5">
+                    <span class="text-xs text-secondary font-semibold mb-2 block">Product Updates</span>
+                    <h3 class="font-semibold text-sm mb-2">New Emotion Controls: Add Excitement, Sadness & More</h3>
+                    <p class="text-xs text-gray-500 mb-3">Fine-tune the emotional tone of your generated speech with our new controls.</p>
+                    <span class="text-[10px] text-gray-600">May 22, 2026 · 3 min read</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Newsletter -->
+        <div class="glass-card rounded-2xl p-10 text-center mt-16" style="background: linear-gradient(135deg, rgba(109,91,255,0.15), rgba(0,212,255,0.1));">
+            <h2 class="font-display font-bold text-xl mb-2">Stay in the loop</h2>
+            <p class="text-gray-400 text-sm mb-5">Get the latest articles and product updates delivered to your inbox.</p>
+            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm outline-none placeholder-gray-500">
+                <button class="btn-gradient text-white text-sm font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform">Subscribe</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-10 border-t border-white/10 mt-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 VoiceForge AI. All rights reserved.</p>
+        <div class="flex justify-center gap-6 mt-3">
+            <a href="about.html" class="hover:text-white transition-colors">About</a>
+            <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                // Note: filtering logic can be added once real blog posts come from a backend/CMS
+            });
+        });
+    </script>
+
+</body>
+</html>

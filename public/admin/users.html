@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - VoiceForge AI Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .btn-gradient { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(109, 91, 255, 0.12); color: #fff; }
+        .sidebar-link.active { border-left: 3px solid #6D5BFF; }
+        .admin-badge { background: linear-gradient(135deg, #f43f5e, #f97316); }
+        .user-row:hover { background: rgba(255,255,255,0.02); }
+        select.role-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="w-64 bg-surface border-r border-white/10 flex flex-col fixed h-full">
+        <div class="px-6 py-5 flex items-center gap-2 border-b border-white/10">
+            <span class="text-primary text-lg">◉</span>
+            <span class="font-display font-bold">VoiceForge AI</span>
+            <span class="admin-badge text-white text-[9px] font-bold px-2 py-0.5 rounded-full ml-auto">ADMIN</span>
+        </div>
+
+        <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+            <a href="dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Admin Dashboard
+            </a>
+            <a href="users.html" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-8a4 4 0 11-8 0 4 4 0 018 0zm6 3a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                Manage Users
+            </a>
+            <a href="messages.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                Messages
+            </a>
+            <a href="activity.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                All Activity
+            </a>
+        </nav>
+
+        <div class="px-3 py-4 border-t border-white/10 space-y-1 text-sm">
+            <a href="../dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Main Site
+            </a>
+            <button id="logoutBtn" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 text-left">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="ml-64 flex-1 flex flex-col">
+
+        <header class="flex items-center justify-between px-8 py-4 border-b border-white/10">
+            <h1 class="font-display font-bold text-xl">Manage Users</h1>
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full admin-badge flex items-center justify-center text-sm font-semibold" id="avatarInitial">A</div>
+                <span class="text-sm font-medium" id="userNameTop">Admin</span>
+            </div>
+        </header>
+
+        <main class="p-8">
+
+            <div class="flex items-center justify-between mb-4">
+                <div class="glass-card flex items-center gap-2 px-4 py-2 rounded-full w-72">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"></path></svg>
+                    <input type="text" id="userSearch" placeholder="Search users..." class="bg-transparent outline-none text-sm w-full placeholder-gray-500">
+                </div>
+                <span class="text-xs text-gray-500" id="userCount">Loading...</span>
+            </div>
+
+            <p class="text-xs mb-3" id="actionMessage"></p>
+
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left text-gray-500 text-xs border-b border-white/10">
+                            <th class="p-4 font-medium">Name</th>
+                            <th class="p-4 font-medium">Email</th>
+                            <th class="p-4 font-medium">Role</th>
+                            <th class="p-4 font-medium">Joined</th>
+                            <th class="p-4 font-medium text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersBody" class="divide-y divide-white/5">
+                        <tr><td colspan="5" class="p-8 text-center text-gray-500 text-sm">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+        let currentUserId = null;
+
+        if (!token || !userStr) {
+            window.location.href = '../login.html';
+        } else {
+            const user = JSON.parse(userStr);
+            currentUserId = user.id;
+            if (user.role !== 'admin') {
+                window.location.href = '../dashboard.html';
+            } else {
+                document.getElementById('userNameTop').textContent = user.name;
+                document.getElementById('avatarInitial').textContent = user.name.charAt(0).toUpperCase();
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '../login.html';
+        });
+
+        let allUsers = [];
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/admin/users', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    document.getElementById('usersBody').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-400 text-sm">${data.message || 'Access denied.'}</td></tr>`;
+                    return;
+                }
+
+                allUsers = data.users || [];
+                document.getElementById('userCount').textContent = `${allUsers.length} users`;
+                renderUsers(allUsers);
+            } catch (err) {
+                document.getElementById('usersBody').innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-400 text-sm">Server error while loading users.</td></tr>';
+            }
+        }
+
+        function renderUsers(users) {
+            const tbody = document.getElementById('usersBody');
+
+            if (!users.length) {
+                tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-gray-500 text-sm">No users found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(u => `
+                <tr class="user-row">
+                    <td class="p-4">${u.name}</td>
+                    <td class="p-4 text-gray-400">${u.email}</td>
+                    <td class="p-4">
+                        <select class="role-select rounded-lg px-2 py-1.5 text-xs outline-none" data-id="${u._id}" ${u._id === currentUserId ? 'disabled' : ''}>
+                            <option value="user" ${u.role === 'user' ? 'selected' : ''}>User</option>
+                            <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Admin</option>
+                        </select>
+                    </td>
+                    <td class="p-4 text-gray-400 text-xs">${new Date(u.createdAt).toLocaleDateString()}</td>
+                    <td class="p-4 text-right">
+                        <button class="delete-user-btn text-red-400 hover:text-red-300 text-xs" data-id="${u._id}" ${u._id === currentUserId ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}>Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            tbody.querySelectorAll('.role-select').forEach(select => {
+                select.addEventListener('change', async () => {
+                    const id = select.dataset.id;
+                    const newRole = select.value;
+                    const msgEl = document.getElementById('actionMessage');
+
+                    try {
+                        const res = await fetch(`/api/admin/users/${id}/role`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({ role: newRole })
+                        });
+                        const data = await res.json();
+
+                        if (!res.ok) {
+                            msgEl.textContent = data.message || 'Could not update role.';
+                            msgEl.className = 'text-xs mb-3 text-red-400';
+                            return;
+                        }
+
+                        msgEl.textContent = `Role updated to "${newRole}" successfully.`;
+                        msgEl.className = 'text-xs mb-3 text-green-400';
+                        loadUsers();
+                    } catch (err) {
+                        msgEl.textContent = 'Server error while updating role.';
+                        msgEl.className = 'text-xs mb-3 text-red-400';
+                    }
+                });
+            });
+
+            tbody.querySelectorAll('.delete-user-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    if (btn.disabled) return;
+                    if (!confirm('Are you sure you want to delete this user? This cannot be undone.')) return;
+
+                    const msgEl = document.getElementById('actionMessage');
+                    try {
+                        const res = await fetch(`/api/admin/users/${btn.dataset.id}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        const data = await res.json();
+
+                        if (!res.ok) {
+                            msgEl.textContent = data.message || 'Could not delete user.';
+                            msgEl.className = 'text-xs mb-3 text-red-400';
+                            return;
+                        }
+
+                        msgEl.textContent = 'User deleted successfully.';
+                        msgEl.className = 'text-xs mb-3 text-green-400';
+                        loadUsers();
+                    } catch (err) {
+                        msgEl.textContent = 'Server error while deleting user.';
+                        msgEl.className = 'text-xs mb-3 text-red-400';
+                    }
+                });
+            });
+        }
+
+        document.getElementById('userSearch').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            renderUsers(allUsers.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)));
+        });
+
+        loadUsers();
+    </script>
+
+</body>
+</html>

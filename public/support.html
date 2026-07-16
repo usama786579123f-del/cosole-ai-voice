@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Contact - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .btn-gradient { background: linear-gradient(135deg, #6D5BFF, #00D4FF); }
+        .text-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus-within { border-color: #6D5BFF; box-shadow: 0 0 0 3px rgba(109, 91, 255, 0.1); }
+        .faq-item { cursor: pointer; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 200px; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .contact-card:hover { border-color: rgba(109,91,255,0.4); transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="sticky top-4 z-50 max-w-6xl mx-auto px-4">
+        <nav class="glass-card rounded-full px-6 py-3 flex items-center justify-between" style="backdrop-filter: blur(16px);">
+            <a href="index.html" class="font-display font-bold text-lg tracking-tight">
+                VOICEFORGE <span class="text-gradient">AI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="voice-library.html" class="hover:text-white transition-colors">Voices</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="support.html" class="text-white">Support</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="dashboard.html" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-2">Dashboard</a>
+                <a href="login.html" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:scale-105 transition-transform">Start Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16">
+
+        <div class="text-center mb-12">
+            <h1 class="font-display font-bold text-3xl sm:text-4xl mb-3">How can we help you?</h1>
+            <p class="text-gray-400 text-sm">Our team is here to support you every step of the way.</p>
+        </div>
+
+        <!-- Contact options -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
+            <div class="contact-card glass-card rounded-2xl p-6 text-center transition-all duration-200">
+                <p class="text-2xl mb-3">📧</p>
+                <h3 class="font-semibold text-sm mb-1">Email Us</h3>
+                <p class="text-xs text-gray-500 mb-3">We reply within 24 hours</p>
+                <a href="mailto:support@voiceforge.ai" class="text-primary text-xs font-medium">support@voiceforge.ai</a>
+            </div>
+            <div class="contact-card glass-card rounded-2xl p-6 text-center transition-all duration-200">
+                <p class="text-2xl mb-3">💬</p>
+                <h3 class="font-semibold text-sm mb-1">Live Chat</h3>
+                <p class="text-xs text-gray-500 mb-3">Mon–Fri, 9am–6pm</p>
+                <button class="text-primary text-xs font-medium">Start a chat →</button>
+            </div>
+            <div class="contact-card glass-card rounded-2xl p-6 text-center transition-all duration-200">
+                <p class="text-2xl mb-3">📚</p>
+                <h3 class="font-semibold text-sm mb-1">Documentation</h3>
+                <p class="text-xs text-gray-500 mb-3">Guides & API reference</p>
+                <a href="docs.html" class="text-primary text-xs font-medium">Browse docs →</a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+            <!-- ===== CONTACT FORM ===== -->
+            <div class="glass-card rounded-2xl p-6">
+                <h2 class="font-display font-semibold text-lg mb-5">Send us a message</h2>
+
+                <form id="contactForm" class="space-y-4">
+                    <div class="input-field rounded-xl px-4 py-3">
+                        <input type="text" id="contactName" required placeholder="Full Name" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+                    </div>
+                    <div class="input-field rounded-xl px-4 py-3">
+                        <input type="email" id="contactEmail" required placeholder="Email Address" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+                    </div>
+                    <div class="input-field rounded-xl px-4 py-3">
+                        <select id="contactTopic" class="bg-transparent w-full outline-none text-sm text-gray-300">
+                            <option class="bg-surface" value="general">General Inquiry</option>
+                            <option class="bg-surface" value="billing">Billing Question</option>
+                            <option class="bg-surface" value="technical">Technical Issue</option>
+                            <option class="bg-surface" value="feature">Feature Request</option>
+                        </select>
+                    </div>
+                    <div class="input-field rounded-xl px-4 py-3">
+                        <textarea id="contactMessage" required rows="5" placeholder="How can we help?" class="bg-transparent w-full outline-none text-sm placeholder-gray-500 resize-none"></textarea>
+                    </div>
+
+                    <p class="text-xs" id="contactFormMessage"></p>
+
+                    <button type="submit" class="w-full btn-gradient text-white text-sm font-semibold py-3.5 rounded-xl hover:scale-[1.02] transition-transform">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- ===== FAQ ===== -->
+            <div>
+                <h2 class="font-display font-semibold text-lg mb-5">Frequently Asked Questions</h2>
+                <div class="space-y-3">
+
+                    <div class="faq-item glass-card rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium">How do I generate my first voice?</p>
+                            <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-xs text-gray-400 mt-3">Sign up for a free account, go to "Text to Speech" from your dashboard, type your text, pick a voice, and click Generate Speech.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium">Can I use generated audio commercially?</p>
+                            <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-xs text-gray-400 mt-3">Yes, on Starter plan and above you get full commercial usage rights for all generated audio.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium">How do I reset my password?</p>
+                            <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-xs text-gray-400 mt-3">Go to Settings → Security tab, and set a new password. You can also use "Forgot password" on the login page.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium">Do you offer refunds?</p>
+                            <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-xs text-gray-400 mt-3">We offer a 7-day money-back guarantee on all paid plans if you're not fully satisfied.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium">How do I contact enterprise sales?</p>
+                            <span class="faq-arrow text-gray-500 transition-transform">▾</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-xs text-gray-400 mt-3">Fill out the contact form here selecting "General Inquiry" and mention Enterprise — our team will reach out within a day.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-10 border-t border-white/10 mt-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 VoiceForge AI. All rights reserved.</p>
+        <div class="flex justify-center gap-6 mt-3">
+            <a href="about.html" class="hover:text-white transition-colors">About</a>
+            <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // Contact form — now saves to the database via /api/messages
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const messageEl = document.getElementById('contactFormMessage');
+
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const topic = document.getElementById('contactTopic').value;
+            const message = document.getElementById('contactMessage').value;
+
+            if (!name || !email || !message) {
+                messageEl.textContent = 'Please fill in all fields.';
+                messageEl.className = 'text-xs text-red-400';
+                return;
+            }
+
+            const submitBtn = document.querySelector('#contactForm button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const res = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, topic, message })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    messageEl.textContent = data.message || 'Could not send message.';
+                    messageEl.className = 'text-xs text-red-400';
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                messageEl.textContent = data.message || 'Thanks! Your message has been received.';
+                messageEl.className = 'text-xs text-green-400';
+                document.getElementById('contactForm').reset();
+            } catch (err) {
+                messageEl.textContent = 'Server error. Please try again.';
+                messageEl.className = 'text-xs text-red-400';
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -87,6 +87,10 @@
 </head>
 <body class="p-4 sm:p-8">
 
+    <video autoplay loop muted playsinline style="position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.12; z-index:-2; pointer-events:none;">
+        <source src="videos/auth-bg-loop.mp4" type="video/mp4">
+    </video>
+
     <!-- Ambient Backgrounds -->
     <div class="ambient-light bg-primary w-[30rem] h-[30rem] top-[-10%] left-[-10%]"></div>
     <div class="ambient-light bg-secondary w-[25rem] h-[25rem] bottom-[-10%] right-[-5%] animation-delay-2000"></div>
@@ -108,7 +112,6 @@
                 <p class="text-gray-400 text-sm">Enter your credentials to access the studio</p>
             </div>
 
-            <!-- Notice: id="login-form" matches your js/login.js -->
             <form id="login-form" class="space-y-4">
                 <div class="input-field rounded-[16px] px-4 py-3 flex items-center gap-3">
                     <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -130,6 +133,8 @@
                     </label>
                     <button type="button" onclick="switchView('view-forgot')" class="text-primary hover:text-secondary transition-colors font-medium">Forgot password?</button>
                 </div>
+
+                <p class="text-sm" id="login-message"></p>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-medium py-3.5 rounded-[16px] hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(109,91,255,0.3)] mt-2">
                     Sign In
@@ -164,15 +169,15 @@
                 <p class="text-gray-400 text-sm">Start generating realistic voices in seconds.</p>
             </div>
 
-            <form class="space-y-4" onsubmit="event.preventDefault(); switchView('view-login');">
+            <form id="signup-form" class="space-y-4">
                 <div class="input-field rounded-[16px] px-4 py-3 flex items-center gap-3">
                     <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <input type="text" required placeholder="Full Name" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+                    <input type="text" id="reg-name" required placeholder="Full Name" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
                 </div>
 
                 <div class="input-field rounded-[16px] px-4 py-3 flex items-center gap-3">
                     <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    <input type="email" required placeholder="Work Email" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+                    <input type="email" id="reg-email" required placeholder="Work Email" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
                 </div>
 
                 <div class="input-field rounded-[16px] px-4 py-3 flex items-center gap-3">
@@ -184,6 +189,8 @@
                     <input type="checkbox" required class="mt-1 rounded border-gray-600 bg-transparent text-primary focus:ring-primary">
                     <span class="text-gray-400 leading-tight">I agree to the <a href="#" class="text-white hover:text-primary transition-colors">Terms of Service</a> and <a href="#" class="text-white hover:text-primary transition-colors">Privacy Policy</a>.</span>
                 </div>
+
+                <p class="text-sm" id="signup-message"></p>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-medium py-3.5 rounded-[16px] hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(109,91,255,0.3)] mt-4">
                     Create Account
@@ -224,8 +231,8 @@
 
     </div>
 
-    <!-- Script file containing actual auth logic must still be included -->
-    <script src="js/login.js"></script>
+    <!-- Script file containing actual auth logic -->
+    <script src="login.js"></script>
 
     <!-- UI Interaction Scripts -->
     <script>

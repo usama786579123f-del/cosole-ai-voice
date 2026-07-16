@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - VoiceForge AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090B',
+                        surface: '#18181B',
+                        primary: '#6D5BFF',
+                        secondary: '#00D4FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #6D5BFF, #00D4FF);
+            box-shadow: 0 4px 15px rgba(109, 91, 255, 0.35), 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gradient:hover { box-shadow: 0 6px 20px rgba(109, 91, 255, 0.5); transform: translateY(-2px); }
+        .btn-gradient:active { transform: translateY(0px) scale(0.97); }
+
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(109, 91, 255, 0.12); color: #fff; }
+        .sidebar-link.active { border-left: 3px solid #6D5BFF; }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus-within { border-color: #6D5BFF; box-shadow: 0 0 0 3px rgba(109, 91, 255, 0.1); }
+
+        .folder-card { transition: all 0.25s ease; cursor: pointer; }
+        .folder-card:hover { border-color: rgba(109,91,255,0.4); transform: translateY(-3px); }
+
+        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="w-64 bg-surface border-r border-white/10 flex flex-col fixed h-full">
+        <div class="px-6 py-5 flex items-center gap-2 border-b border-white/10">
+            <span class="text-primary text-lg">◉</span>
+            <span class="font-display font-bold">VoiceForge AI</span>
+        </div>
+
+        <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+            <a href="dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Dashboard
+            </a>
+            <a href="generator.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0-11a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                Text to Speech
+            </a>
+            <a href="voice-library.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7"></path><circle cx="12" cy="7" r="3" stroke-width="2"></circle></svg>
+                Voice Library
+            </a>
+            <a href="my-projects.html" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                My Projects
+            </a>
+            <a href="history.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                History
+            </a>
+            <a href="api.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16M6 8l-4 4 4 4m12-8l4 4-4 4"></path></svg>
+                API Keys
+            </a>
+            <a href="pricing.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 10v2"></path></svg>
+                Pricing
+            </a>
+        </nav>
+
+        <div class="px-3 py-4 border-t border-white/10 space-y-1 text-sm">
+            <a href="docs.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Documentation
+            </a>
+            <a href="settings.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                Settings
+            </a>
+            <a href="profile.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                Profile
+            </a>
+            <a href="support.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M9.172 9.172a4 4 0 015.656 0M12 12h.01M6.343 6.343a9 9 0 000 12.728l2.829-2.829"></path></svg>
+                Help & Support
+            </a>
+            <button id="logoutBtn" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 text-left">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="ml-64 flex-1 flex flex-col">
+
+        <header class="flex items-center justify-between px-8 py-4 border-b border-white/10">
+            <h1 class="font-display font-bold text-xl">My Projects</h1>
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-sm font-semibold" id="avatarInitial">A</div>
+                <span class="text-sm font-medium" id="userNameTop">User</span>
+            </div>
+        </header>
+
+        <!-- ===== FOLDER LIST VIEW ===== -->
+        <main id="folderListView" class="p-8">
+            <div class="flex items-center justify-between mb-6">
+                <p class="text-sm text-gray-400">Organize your generated voices into folders.</p>
+                <button id="newProjectBtn" class="btn-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full">+ New Project</button>
+            </div>
+
+            <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <p class="text-sm text-gray-500 col-span-full text-center py-10">Loading projects...</p>
+            </div>
+        </main>
+
+        <!-- ===== PROJECT DETAIL VIEW (hidden by default) ===== -->
+        <main id="projectDetailView" class="p-8 hidden">
+            <button id="backToProjectsBtn" class="text-sm text-gray-400 hover:text-white mb-4 flex items-center gap-2">
+                ← Back to Projects
+            </button>
+
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="font-display font-bold text-xl" id="projectDetailName">Project Name</h2>
+                    <p class="text-xs text-gray-500" id="projectDetailDesc"></p>
+                </div>
+                <button id="deleteProjectBtn" class="text-xs text-red-400 hover:text-red-300 font-medium">Delete Project</button>
+            </div>
+
+            <div id="projectItemsList" class="glass-card rounded-2xl overflow-hidden">
+                <p class="text-sm text-gray-500 text-center py-10">Loading items...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== NEW PROJECT MODAL ===== -->
+    <div id="newProjectModal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 hidden">
+        <div class="glass-card rounded-2xl p-6 w-full max-w-sm mx-4" style="background: #18181B;">
+            <h3 class="font-semibold mb-4">New Project</h3>
+
+            <div class="input-field rounded-xl px-4 py-3 mb-3">
+                <input type="text" id="newProjectName" placeholder="Project name (e.g. YouTube Intros)" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+            </div>
+            <div class="input-field rounded-xl px-4 py-3 mb-4">
+                <input type="text" id="newProjectDesc" placeholder="Description (optional)" class="bg-transparent w-full outline-none text-sm placeholder-gray-500">
+            </div>
+
+            <p class="text-xs text-red-400 mb-3" id="newProjectMessage"></p>
+
+            <div class="flex gap-3">
+                <button id="cancelNewProjectBtn" class="flex-1 bg-white/5 border border-white/10 text-white text-sm font-medium py-2.5 rounded-xl">Cancel</button>
+                <button id="createProjectBtn" class="flex-1 btn-gradient text-white text-sm font-semibold py-2.5 rounded-xl">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+
+        if (!token || !userStr) {
+            window.location.href = 'login.html';
+        } else {
+            const user = JSON.parse(userStr);
+            document.getElementById('userNameTop').textContent = user.name;
+            document.getElementById('avatarInitial').textContent = user.name.charAt(0).toUpperCase();
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+
+        // ===== Load Projects =====
+        async function loadProjects() {
+            try {
+                const res = await fetch('/api/projects', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                const grid = document.getElementById('projectsGrid');
+
+                if (!res.ok) {
+                    grid.innerHTML = `<p class="text-sm text-red-400 col-span-full text-center py-10">${data.message || 'Could not load projects.'}</p>`;
+                    return;
+                }
+
+                const projects = data.projects || [];
+
+                if (!projects.length) {
+                    grid.innerHTML = '<p class="text-sm text-gray-500 col-span-full text-center py-10">No projects yet. Create one to get started!</p>';
+                    return;
+                }
+
+                grid.innerHTML = projects.map(p => `
+                    <div class="folder-card glass-card rounded-2xl p-5" data-id="${p._id}">
+                        <p class="text-2xl mb-3">📁</p>
+                        <h3 class="font-semibold text-sm mb-1">${p.name}</h3>
+                        <p class="text-xs text-gray-500 mb-2">${p.description || 'No description'}</p>
+                        <p class="text-[10px] text-gray-600">${p.itemCount} item${p.itemCount !== 1 ? 's' : ''}</p>
+                    </div>
+                `).join('');
+
+                grid.querySelectorAll('.folder-card').forEach(card => {
+                    card.addEventListener('click', () => openProject(card.dataset.id));
+                });
+            } catch (err) {
+                document.getElementById('projectsGrid').innerHTML = '<p class="text-sm text-red-400 col-span-full text-center py-10">Server error while loading projects.</p>';
+            }
+        }
+
+        // ===== Open a Project's detail view =====
+        let currentProjectId = null;
+
+        async function openProject(id) {
+            currentProjectId = id;
+            document.getElementById('folderListView').classList.add('hidden');
+            document.getElementById('projectDetailView').classList.remove('hidden');
+
+            try {
+                const res = await fetch(`/api/projects/${id}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    document.getElementById('projectItemsList').innerHTML = `<p class="text-sm text-red-400 text-center py-10">${data.message || 'Could not load project.'}</p>`;
+                    return;
+                }
+
+                document.getElementById('projectDetailName').textContent = data.project.name;
+                document.getElementById('projectDetailDesc').textContent = data.project.description || '';
+
+                const items = data.items || [];
+                const container = document.getElementById('projectItemsList');
+
+                if (!items.length) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 text-center py-10">No items in this project yet. Go to <a href="history.html" class="text-primary">History</a> and add some!</p>`;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-gray-500 text-xs border-b border-white/10">
+                                <th class="p-4 font-medium">Text</th>
+                                <th class="p-4 font-medium">Voice</th>
+                                <th class="p-4 font-medium">Audio</th>
+                                <th class="p-4 font-medium">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            ${items.map(item => `
+                                <tr>
+                                    <td class="p-4 max-w-xs truncate text-gray-300 text-xs">${(item.text || '').substring(0, 50)}...</td>
+                                    <td class="p-4 text-gray-400 text-xs">${item.voiceName || 'Unknown'}</td>
+                                    <td class="p-4">${item.audioUrl ? `<audio controls class="h-8" style="max-width:160px"><source src="${item.audioUrl}"></audio>` : '-'}</td>
+                                    <td class="p-4 text-gray-400 text-xs">${new Date(item.createdAt).toLocaleDateString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (err) {
+                document.getElementById('projectItemsList').innerHTML = '<p class="text-sm text-red-400 text-center py-10">Server error.</p>';
+            }
+        }
+
+        document.getElementById('backToProjectsBtn').addEventListener('click', () => {
+            document.getElementById('projectDetailView').classList.add('hidden');
+            document.getElementById('folderListView').classList.remove('hidden');
+            loadProjects();
+        });
+
+        document.getElementById('deleteProjectBtn').addEventListener('click', async () => {
+            if (!confirm('Delete this project? Your audios will stay in History.')) return;
+            try {
+                await fetch(`/api/projects/${currentProjectId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                document.getElementById('backToProjectsBtn').click();
+            } catch (err) {
+                alert('Could not delete project.');
+            }
+        });
+
+        // ===== New Project Modal =====
+        const modal = document.getElementById('newProjectModal');
+
+        document.getElementById('newProjectBtn').addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        document.getElementById('cancelNewProjectBtn').addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('newProjectName').value = '';
+            document.getElementById('newProjectDesc').value = '';
+            document.getElementById('newProjectMessage').textContent = '';
+        });
+
+        document.getElementById('createProjectBtn').addEventListener('click', async () => {
+            const name = document.getElementById('newProjectName').value.trim();
+            const description = document.getElementById('newProjectDesc').value.trim();
+            const messageEl = document.getElementById('newProjectMessage');
+
+            if (!name) {
+                messageEl.textContent = 'Project name is required.';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/projects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ name, description })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    messageEl.textContent = data.message || 'Could not create project.';
+                    return;
+                }
+
+                document.getElementById('cancelNewProjectBtn').click();
+                loadProjects();
+            } catch (err) {
+                messageEl.textContent = 'Server error. Please try again.';
+            }
+        });
+
+        loadProjects();
+    </script>
+
+</body>
+</html>

@@ -246,4 +246,4 @@ app.post('/api/tts', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`\n🎙️  Voice AI Studio server running: http://localhost:${PORT}\n`);
-});
+});module.exports = app;
